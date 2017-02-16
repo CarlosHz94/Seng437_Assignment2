@@ -25,9 +25,12 @@ public class DataUtilitiesTest extends DataUtilities {
 		values = mockingContext.mock(Values2D.class);
 	}
 
+	/** 
+	 * Tests for calculateColumnTotal
+	 */
+
 	@Test
 	public void calculateColumnTotalForTwoPositiveValues() {
-		//setup
 		mockingContext.checking(new Expectations() {
 			{
 				oneOf(values).getRowCount();
@@ -38,12 +41,120 @@ public class DataUtilitiesTest extends DataUtilities {
 				will(returnValue(2.5));
 			}
 		});
-		// exercise double result =
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		// verify
-		assertEquals(result, 10.0, .000000001d);
-		// tear-down: NONE in this test method
-
+		assertEquals(10.0, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateColumnTotalForTwoNegativeValues(){
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getRowCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-5.6));
+				oneOf(values).getValue(1, 0);
+				will(returnValue(-4.4));
+			}
+		});
+		double result = DataUtilities.calculateColumnTotal(values, 0);
+		assertEquals(-10.0, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateColumnTotalForCloseToPositiveMaxDoubleValues(){ 
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getRowCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue((Double.MAX_VALUE/2)-1));
+			}
+		});
+		double result = DataUtilities.calculateColumnTotal(values, 0);
+		assertEquals(Double.MAX_VALUE-1, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateColumnTotalAtMaxPositiveDoubleValues(){
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getRowCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateColumnTotal(values, 0);
+		assertEquals(Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateColumnTotalPastMaxPositiveDoubleValues(){
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getRowCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(1+Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateColumnTotal(values, 0);
+		assertEquals(1+Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateColumnTotalForCloseToNegativeMaxDoubleValues(){
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getRowCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(1-Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateColumnTotal(values, 0);
+		assertEquals(1-Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateColumnTotalAtMaxNegativeDoubleValues(){
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getRowCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(-Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateColumnTotal(values, 0);
+		assertEquals(-Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateColumnTotalPastMaxNegativeDoubleValues(){
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getRowCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(-1-Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateColumnTotal(values, 0);
+		assertEquals(-1-Double.MAX_VALUE, result, .000000001d);
 	}
 
 	/**

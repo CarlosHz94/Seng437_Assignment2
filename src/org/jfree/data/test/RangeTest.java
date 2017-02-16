@@ -152,13 +152,13 @@ public class RangeTest{
 	}
 	
 	@Test 
-	public void overMaxUpperRangeGetUpperBoundTest(){
+	public void overMaxUpperRangeGetUpperBoundTest(){	//Fails
 		exampleRange = new Range(0, Double.MAX_VALUE + 1);
 		assertEquals("The upper bound of this range should be max double plus 1", Double.MAX_VALUE + 1, exampleRange.getUpperBound(), .000000001d);
 	}
 	
 	@Test
-	public void UnderMaxRangeGetUpperBOundTest(){
+	public void UnderMaxRangeGetUpperBOundTest(){		//Fails
 		exampleRange = new Range(0, Double.MAX_VALUE - 1);
 		assertEquals("The upper bound of this range should be max double minus 1", Double.MAX_VALUE - 1, exampleRange.getUpperBound(), .000000001d);
 	}
