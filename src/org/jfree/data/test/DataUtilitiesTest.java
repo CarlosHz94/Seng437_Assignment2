@@ -11,7 +11,7 @@ import org.junit.*;
 public class DataUtilitiesTest extends DataUtilities {
 	Mockery mockingContext;
 	Values2D values;
-	
+
 	@Before
 	public void setup(){
 		mockingContext = new Mockery();
@@ -36,8 +36,8 @@ public class DataUtilitiesTest extends DataUtilities {
 		// verify
 		assertEquals(result, 10.0, .000000001d);
 		// tear-down: NONE in this test method
-		
-		
+
+
 		}
 
 }
