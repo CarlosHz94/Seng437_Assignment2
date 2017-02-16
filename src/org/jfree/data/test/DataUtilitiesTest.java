@@ -30,7 +30,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 */
 
 	@Test
-	public void calculateColumnTotalForTwoPositiveValues() {
+	public void calculateColumnTotalForTwoPositiveValues() {	//Pass
 		mockingContext.checking(new Expectations() {
 			{
 				oneOf(values).getRowCount();
@@ -46,7 +46,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalForTwoNegativeValues(){
+	public void calculateColumnTotalForTwoNegativeValues(){		//Pass
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -62,7 +62,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalForCloseToPositiveMaxDoubleValues(){ 
+	public void calculateColumnTotalForCloseToPositiveMaxDoubleValues(){	//Pass
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -78,7 +78,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalAtMaxPositiveDoubleValues(){
+	public void calculateColumnTotalAtMaxPositiveDoubleValues(){	//Pass
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -94,7 +94,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalPastMaxPositiveDoubleValues(){
+	public void calculateColumnTotalPastMaxPositiveDoubleValues(){	//Pass
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -110,7 +110,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalForCloseToNegativeMaxDoubleValues(){
+	public void calculateColumnTotalForCloseToNegativeMaxDoubleValues(){	//Pass
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -126,7 +126,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalAtMaxNegativeDoubleValues(){
+	public void calculateColumnTotalAtMaxNegativeDoubleValues(){	//Pass
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -142,7 +142,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalPastMaxNegativeDoubleValues(){
+	public void calculateColumnTotalPastMaxNegativeDoubleValues(){	//Pass
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -156,12 +156,144 @@ public class DataUtilitiesTest extends DataUtilities {
 		double result = DataUtilities.calculateColumnTotal(values, 0);
 		assertEquals(-1-Double.MAX_VALUE, result, .000000001d);
 	}
+	
+	/**
+	 * Tests for calculate row total
+	 */
+	
+	@Test
+	public void calculateRowTotalForTwoPositiveValues() {	//Fails
+		mockingContext.checking(new Expectations() {
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(7.5));
+				oneOf(values).getValue(1, 0);
+				will(returnValue(2.5));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(10.0, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateRowTotalForTwoNegativeValues(){	//Fails
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-5.6));
+				oneOf(values).getValue(1, 0);
+				will(returnValue(-4.4));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(-10.0, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateRowTotalForCloseToPositiveMaxDoubleValues(){ 	//Fails
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue((Double.MAX_VALUE/2)-1));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(Double.MAX_VALUE-1, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateRowTotalAtMaxPositiveDoubleValues(){	//Fails
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateRowTotalPastMaxPositiveDoubleValues(){		//Fails
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(1+Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(1+Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateRowTotalForCloseToNegativeMaxDoubleValues(){	//Fails
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(1-Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(1-Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateRowTotalAtMaxNegativeDoubleValues(){	//Fails
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(-Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(-Double.MAX_VALUE, result, .000000001d);
+	}
+	
+	@Test
+	public void calculateRowTotalPastMaxNegativeDoubleValues(){		//Fails
+		mockingContext.checking(new Expectations(){
+			{
+				oneOf(values).getColumnCount();
+				will(returnValue(2));
+				oneOf(values).getValue(0, 0);
+				will(returnValue(-Double.MAX_VALUE/2));
+				oneOf(values).getValue(1, 0);
+				will (returnValue(-1-Double.MAX_VALUE/2));
+			}
+		});
+		double result = DataUtilities.calculateRowTotal(values, 0);
+		assertEquals(-1-Double.MAX_VALUE, result, .000000001d);
+	}
 
 	/**
 	 * calling createNumberArray() function from DataUtility using five (an abitrary number) doubles
 	 */
 	@Test
-	public void createNumberArrayWithFiveDoubles(){
+	public void createNumberArrayWithFiveDoubles(){		//Fails
 		//setup
 		double[] data = {1.2,2.2,3.2,4.2,5.2};
 		Number[] expecteds = {1.2,2.2,3.2,4.2,5.2};
@@ -174,7 +306,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility with null data
 	 */
 	@Test
-	public void createNumberArrayWithNullData(){
+	public void createNumberArrayWithNullData(){	//Pass
 		//setup
 		double[] data = null;
 		try{
@@ -189,7 +321,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility with only 1 double in the array
 	 */
 	@Test
-	public void createNumberArrayWithOneDouble(){
+	public void createNumberArrayWithOneDouble(){		//Fails
 		//setup
 		double[] data = {1.2};
 		Number[] expecteds = {1.2};
@@ -203,7 +335,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility by initializing data with a single int
 	 */
 	@Test
-	public void createNumberArrayWithOneInt(){
+	public void createNumberArrayWithOneInt(){		//Fails
 		//setup
 		double[] data = {1};
 		Number[] expecteds = {1.0};
@@ -216,7 +348,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility by initializing data with 10 ints
 	 */
 	@Test
-	public void createNumberArrayWithTenInt(){
+	public void createNumberArrayWithTenInt(){		//Fails
 		//setup
 		double[] data = {0,1,2,3,4,5,6,7,8,9};
 		Number[] expecteds = {0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0};
@@ -229,7 +361,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility with negatives
 	 */
 	@Test
-	public void createNumberArrayWithNegativeDoubles(){
+	public void createNumberArrayWithNegativeDoubles(){		//Fails
 		//setup
 		double[] data = {-1.3,2.3,0.0};
 		Number[] expecteds = {-1.3,2.3,0.0};
@@ -242,7 +374,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility with max values for doubles mixed in data
 	 */
 	@Test
-	public void createNumberArrayWithMaxValue(){
+	public void createNumberArrayWithMaxValue(){	//Fails
 		//setup
 		double[] data = {1.2,Double.MAX_VALUE,-3.4};
 		Number[] expecteds = {1.2,Double.MAX_VALUE,-3.4};
@@ -256,7 +388,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility with NaN mixed in data
 	 */
 	@Test
-	public void createNumberArrayWithNaN(){
+	public void createNumberArrayWithNaN(){		//Fails
 		//setup
 		double[] data = {1.2,3.4,Double.NaN, 2.0};
 		try{
@@ -271,7 +403,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * calling createNumberArray() function from DataUtility with Double's Min value
 	 */
 	@Test
-	public void createNumberArrayWithMinValue(){
+	public void createNumberArrayWithMinValue(){	//Fails
 		//setup
 		double[] data = {1.2,3.4,4.5,-1.2,Double.MIN_VALUE,3.2};
 		Number[] expecteds = {1.2,3.4,4.5,-1.2,Double.MIN_VALUE,3.2};
@@ -289,7 +421,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * 2      5
 	 */
 	@Test
-	public void getCummulativePercentagesWithThreeNumbers() {
+	public void getCummulativePercentagesWithThreeNumbers() {	//Fails
 		//setup
 		KeyedValues data = mockingContext.mock(KeyedValues.class);
 		mockingContext.checking(new Expectations() {
@@ -333,7 +465,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * 2      5
 	 */
 	@Test
-	public void getCummulativePercentagesWithMixedPositivesAndNegatives() {
+	public void getCummulativePercentagesWithMixedPositivesAndNegatives() {		//Fails
 		//setup
 		KeyedValues data = mockingContext.mock(KeyedValues.class);
 		mockingContext.checking(new Expectations() {
@@ -377,7 +509,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * 2      0
 	 */
 	@Test
-	public void getCummulativePercentagesWithZeros() {
+	public void getCummulativePercentagesWithZeros() {		//Pass
 		//setup
 		KeyedValues data = mockingContext.mock(KeyedValues.class);
 		mockingContext.checking(new Expectations() {
@@ -421,7 +553,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	 * 2      2
 	 */
 	@Test
-	public void getCummulativePercentagesWithZeroSum() {
+	public void getCummulativePercentagesWithZeroSum() {	//Fails
 		//setup
 		KeyedValues data = mockingContext.mock(KeyedValues.class);
 		mockingContext.checking(new Expectations() {
@@ -455,32 +587,5 @@ public class DataUtilitiesTest extends DataUtilities {
 		}
 		assertArrayEquals(expecteds, actuals);
 	}
-
-	@Test
-	public void calculateColumnTotalForTwoNegativeValues(){
-		mockingContext.checking(new Expectations(){
-			{
-				oneOf(values).getRowCount();
-				will(returnValue(2));
-				oneOf(values).getValue(0, 0);
-				will(returnValue(-5.6));
-				oneOf(values).getValue(1, 0);
-				will(returnValue(-4.4));
-			}
-		});
-		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(result, -10.0, .000000001d);
-	}
-
-	@Test
-	public void calculateColumnTotalForCloseToMaxDoubleValues(){
-		mockingContext.checking(new Expectations(){
-			{
-				oneOf(values).getRowCount();
-				will();//missing?
-			}
-		});
-	}
-
 
 }

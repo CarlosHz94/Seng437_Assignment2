@@ -199,13 +199,132 @@ public class RangeTest{
 	}
 	
 	@Test
-	public void OverMaxRangeNotEqualTest() { //fails
+	public void overMaxRangeNotEqualTest() { //fails
 		Range exampleRange1 = new Range(-Double.MAX_VALUE-1,Double.MAX_VALUE+1);
 		Range exampleRange2 = new Range(-Double.MAX_VALUE-2,Double.MAX_VALUE+2);
 		boolean areDifferent = !exampleRange1.equals(exampleRange2);
 		assertEquals("The ranges should be equal",true,areDifferent);
 	}
 	
+	//Tests for expand
+	
+		@Test
+		public void expandZeroTest(){		//Pass
+			exampleRange = new Range(-1, 1);
+			Range.expand(exampleRange, 0, 0);
+			Range testRange = new Range(-1, 1);
+			assertTrue("Range should be (-1,1)", testRange.equals(exampleRange));
+		}
+		
+		@Test
+		public void expandUpperBoundTest(){		//Pass
+			exampleRange = new Range(0, 2);
+			Range.expand(exampleRange, 0, 0.5);
+			Range testRange = new Range(0, 3);
+			assertTrue("Range should be (0,3)", testRange.equals(exampleRange));
+		}
+		
+		@Test
+		public void expandLowerBoundTest(){		//Fails
+			exampleRange = new Range(0, 2);
+			Range.expand(exampleRange, 0.5, 0);
+			Range testRange = new Range(-1, 2);
+			assertTrue("Range should be (-1,2)", testRange.equals(exampleRange));
+		}
+		
+		@Test
+		public void expandBothBoundsTest(){		//Fails
+			exampleRange = new Range(2, 6);
+			Range.expand(exampleRange, 0.25, 0.5);
+			Range testRange = new Range(1, 8);
+			assertTrue("Range should be (1,8)", testRange.equals(exampleRange));
+		}
+		
+		@Test
+		public void expandUpperBoundNegativeTest(){		//Error
+			exampleRange = new Range(0, 2);
+			Range.expand(exampleRange, 0, -0.5);
+			Range testRange = new Range(0, 1);
+			assertTrue("Range should be (0,1)", testRange.equals(exampleRange));
+		}
+		
+		@Test
+		public void expandLowerBoundNegativeTest(){		//Error	
+			exampleRange = new Range(0, 2);
+			Range.expand(exampleRange, -0.5, 0);
+			Range testRange = new Range(1, 2);
+			assertTrue("Range should be (1,2)", testRange.equals(exampleRange));
+		}
+		
+		@Test
+		public void expandBothBoundsNegativeTest(){		//Error
+			exampleRange = new Range(0, 4);
+			Range.expand(exampleRange, -0.25, -0.25);
+			Range testRange = new Range(1, 3);
+			assertTrue("Range should be (1,3)", testRange.equals(exampleRange));
+		}
+		
+		//Tests for combine
+		
+		@Test
+		public void combineSameRange(){		//Pass
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(exampleRange, new Range(0,1)).equals(new Range(0,1)));
+		}
+		
+		public void combineLargerUpperRangeFirstParam(){
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(new Range(0,2), exampleRange).equals(new Range(0,2)));
+		}
+		
+		@Test
+		public void combineLargerUpperRangeSecondParam(){	//Pass
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(exampleRange, new Range(0,2)).equals(new Range(0,2)));
+		}
+		
+		@Test
+		public void combineLargerLowerRangeFirstParam(){	//Error
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(new Range(-1,0), exampleRange).equals(new Range(-1,1)));
+		}
+		
+		@Test
+		public void combineLargerLowerRangeSecondParam(){	//Pass
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(exampleRange, new Range(-1,0)).equals(new Range(-1,1)));
+		}
+		
+		@Test
+		public void combineLargerRangeFirstParam(){		//Error
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(new Range(-1,2), exampleRange).equals(new Range(-1,2)));
+		}
+		
+		@Test
+		public void combineLargerRangeSecondParam(){		//Pass
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(exampleRange, new Range(-1,2)).equals(new Range(-1,2)));
+		}
+		
+		@Test
+		public void combineBothNull(){		//Pass
+			exampleRange = null;
+			assertNull(Range.combine(null, exampleRange));
+		}
+		
+		@Test
+		public void combineFirstNull(){		//Pass
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(null, exampleRange).equals(new Range(0,1)));
+		}
+		
+		@Test
+		public void combineSecondNull(){		//Pass
+			exampleRange = new Range(0,1);
+			assertTrue(Range.combine(exampleRange, null).equals(new Range(0,1)));
+		}
+		
 	@After
 	public void tearDown()
 		throws Exception{}
