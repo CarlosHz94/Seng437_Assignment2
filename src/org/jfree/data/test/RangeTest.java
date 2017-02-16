@@ -118,7 +118,8 @@ public class RangeTest{
 		assertEquals("The central value should be 1", 1, exampleRange.getCentralValue(), .000000001d);
 	}
 	
-	//Tests for getUpperBound
+//**********************************************************
+	//Upper Bound Tests
 	
 	@Test
 	public void simpleGetUpperBoundTest(){		//Fails
@@ -160,6 +161,49 @@ public class RangeTest{
 	public void UnderMaxRangeGetUpperBOundTest(){
 		exampleRange = new Range(0, Double.MAX_VALUE - 1);
 		assertEquals("The upper bound of this range should be max double minus 1", Double.MAX_VALUE - 1, exampleRange.getUpperBound(), .000000001d);
+	}
+	
+//**********************************************************
+	//Equals Tests
+	
+	@Test
+	public void SimpleEqualsTest() { //passes
+		Range exampleRange1 = new Range(-1,1);
+		Range exampleRange2 = new Range(-1,1);
+		boolean areSame = exampleRange1.equals(exampleRange2);
+		assertEquals("The ranges should be the equal",true,areSame);
+	}
+	
+	@Test
+	public void SimpleNotEqualsTest() { //passses
+		Range exampleRange1 = new Range(-1,1);
+		Range exampleRange2 = new Range(-600,-500);
+		boolean areDifferent = !exampleRange1.equals(exampleRange2);
+		assertEquals("The ranges should not be equal",true,areDifferent);
+	}
+	
+	@Test
+	public void MaxRangeEqualTest() { //passes
+		Range exampleRange1 = new Range(-Double.MAX_VALUE,Double.MAX_VALUE);
+		Range exampleRange2 = new Range(-Double.MAX_VALUE,Double.MAX_VALUE);
+		boolean areSame = exampleRange1.equals(exampleRange2);
+		assertEquals("The ranges should be equal",true,areSame);
+	}
+	
+	@Test
+	public void OverMaxRangeEqualTest() { //passes
+		Range exampleRange1 = new Range(-Double.MAX_VALUE-1,Double.MAX_VALUE+1);
+		Range exampleRange2 = new Range(-Double.MAX_VALUE-1,Double.MAX_VALUE+1);
+		boolean areSame = exampleRange1.equals(exampleRange2);
+		assertEquals("The ranges should be equal",true,areSame);
+	}
+	
+	@Test
+	public void OverMaxRangeNotEqualTest() { //fails
+		Range exampleRange1 = new Range(-Double.MAX_VALUE-1,Double.MAX_VALUE+1);
+		Range exampleRange2 = new Range(-Double.MAX_VALUE-2,Double.MAX_VALUE+2);
+		boolean areDifferent = !exampleRange1.equals(exampleRange2);
+		assertEquals("The ranges should be equal",true,areDifferent);
 	}
 	
 	@After
