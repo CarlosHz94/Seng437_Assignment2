@@ -18,7 +18,7 @@ import org.junit.*;
 public class DataUtilitiesTest extends DataUtilities {
 	Mockery mockingContext;
 	Values2D values;
-	
+
 	@Before
 	public void setup(){
 		mockingContext = new Mockery();
@@ -46,6 +46,9 @@ public class DataUtilitiesTest extends DataUtilities {
 
 	}
 
+	/**
+	 * calling createNumberArray() function from DataUtility using five (an abitrary number) doubles
+	 */
 	@Test
 	public void createNumberArrayWithFiveDoubles(){
 		//setup
@@ -56,8 +59,11 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
+	/**
+	 * calling createNumberArray() function from DataUtility with null data
+	 */
 	@Test
-	public void createNumberArrayWithEmptyData(){
+	public void createNumberArrayWithNullData(){
 		//setup
 		double[] data = null;
 		try{
@@ -68,6 +74,9 @@ public class DataUtilitiesTest extends DataUtilities {
 		}
 	}
 
+	/**
+	 * calling createNumberArray() function from DataUtility with only 1 double in the array
+	 */
 	@Test
 	public void createNumberArrayWithOneDouble(){
 		//setup
@@ -79,6 +88,9 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 
 
+	/**
+	 * calling createNumberArray() function from DataUtility by initializing data with a single int
+	 */
 	@Test
 	public void createNumberArrayWithOneInt(){
 		//setup
@@ -89,7 +101,9 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
-
+	/**
+	 * calling createNumberArray() function from DataUtility by initializing data with 10 ints
+	 */
 	@Test
 	public void createNumberArrayWithTenInt(){
 		//setup
@@ -100,6 +114,9 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
+	/**
+	 * calling createNumberArray() function from DataUtility with negatives
+	 */
 	@Test
 	public void createNumberArrayWithNegativeDoubles(){
 		//setup
@@ -110,6 +127,9 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
+	/**
+	 * calling createNumberArray() function from DataUtility with max values for doubles mixed in data
+	 */
 	@Test
 	public void createNumberArrayWithMaxValue(){
 		//setup
@@ -121,10 +141,13 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 
 
+	/**
+	 * calling createNumberArray() function from DataUtility with NaN mixed in data
+	 */
 	@Test
 	public void createNumberArrayWithNaN(){
 		//setup
-		double[] data = {1.2,3.4,Double.NaN};
+		double[] data = {1.2,3.4,Double.NaN, 2.0};
 		try{
 			Number[] actuals = DataUtilities.createNumberArray(data);
 			fail("NaN was not detected");
@@ -133,6 +156,9 @@ public class DataUtilitiesTest extends DataUtilities {
 		}
 	}
 
+	/**
+	 * calling createNumberArray() function from DataUtility with Double's Min value
+	 */
 	@Test
 	public void createNumberArrayWithMinValue(){
 		//setup
@@ -143,6 +169,14 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
+	/**
+	 * calling getCummulativePercentages() function from DataUtility using mocked KeyedValues.
+	 * Mocking a normal set of keys and values as followed:
+	 * key    value
+	 * 0      3
+	 * 1      4
+	 * 2      5
+	 */
 	@Test
 	public void getCummulativePercentagesWithThreeNumbers() {
 		//setup
@@ -179,6 +213,14 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
+	/**
+	 * calling getCummulativePercentages() function from DataUtility using mocked KeyedValues.
+	 * Mocking a normal set of keys and values as followed:
+	 * key    value
+	 * 0      -3
+	 * 1      4
+	 * 2      5
+	 */
 	@Test
 	public void getCummulativePercentagesWithMixedPositivesAndNegatives() {
 		//setup
@@ -215,7 +257,14 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
-
+	/**
+	 * calling getCummulativePercentages() function from DataUtility using mocked KeyedValues.
+	 * Mocking a normal set of keys and values as followed:
+	 * key    value
+	 * 0      0
+	 * 1      0
+	 * 2      0
+	 */
 	@Test
 	public void getCummulativePercentagesWithZeros() {
 		//setup
@@ -252,6 +301,14 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 
+	/**
+	 * calling getCummulativePercentages() function from DataUtility using mocked KeyedValues.
+	 * Mocking a normal set of keys and values as followed:
+	 * key    value
+	 * 0      -3
+	 * 1      1
+	 * 2      2
+	 */
 	@Test
 	public void getCummulativePercentagesWithZeroSum() {
 		//setup
@@ -303,13 +360,13 @@ public class DataUtilitiesTest extends DataUtilities {
 		double result = DataUtilities.calculateColumnTotal(values, 0);
 		assertEquals(result, -10.0, .000000001d);
 	}
-	
+
 	@Test
 	public void calculateColumnTotalForCloseToMaxDoubleValues(){
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
-				will()
+				will();//missing?
 			}
 		});
 	}
