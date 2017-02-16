@@ -46,7 +46,7 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	@Test
-	public void calculateColumnTotalForTwoNegativeValues(){
+	public void calculateColumnTotalForTwoNegativeValues1(){
 		mockingContext.checking(new Expectations(){
 			{
 				oneOf(values).getRowCount();
@@ -317,6 +317,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		mockingContext.assertIsSatisfied();
 		Number[] expecteds = {(3.0/(3.0+4.0+5.0)),((3.0+4.0)/(3.0+4.0+5.0)),1.0};
 		Number[] actuals = {0.0,0.0,0.0};
+		assertEquals(3, result.getItemCount());
 		if(result.getItemCount() != 3) fail("Wrong amount of key returned");
 		for(int index = 0; index < result.getItemCount(); index++){
 			actuals[index] = result.getValue(index);
@@ -471,7 +472,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		double result = DataUtilities.calculateColumnTotal(values, 0);
 		assertEquals(result, -10.0, .000000001d);
 	}
-
+/*
 	@Test
 	public void calculateColumnTotalForCloseToMaxDoubleValues(){
 		mockingContext.checking(new Expectations(){
@@ -481,6 +482,5 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 	}
-
-
+*/
 }
