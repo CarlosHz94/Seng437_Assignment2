@@ -587,5 +587,83 @@ public class DataUtilitiesTest extends DataUtilities {
 		}
 		assertArrayEquals("Testing with values [-3,1,2], expecting [NaN, NaN, NaN] ",expecteds, actuals);
 	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void create2DNumberArrayWithNull(){
+		//setup
+		double[][] data = null;
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+	}
+	
+	@Test 
+	public void create2DNumberArrayWithNaN(){
+		//setup
+		double[][] data = {{0.0, 1.1},{0.1, Double.NaN}};
+		Number[][] expecteds = {{0.0, 1.1},{0.1, Double.NaN}};
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+		assertArrayEquals(expecteds, actuals);
+	}
+	
+	@Test 
+	public void create2DNumberArrayWithPOS_INF(){
+		//setup
+		double[][] data = {{0.0, 1.1},{0.1, Double.POSITIVE_INFINITY}};
+		Number[][] expecteds = {{0.0, 1.1},{0.1, Double.POSITIVE_INFINITY}};
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+		assertArrayEquals(expecteds, actuals);
+	}
+	
+	@Test 
+	public void create2DNumberArrayWithNEG_INF(){
+		//setup
+		double[][] data = {{0.0, 1.1},{0.1, Double.NEGATIVE_INFINITY}};
+		Number[][] expecteds = {{0.0, 1.1},{0.1, Double.NEGATIVE_INFINITY}};
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+		assertArrayEquals(expecteds, actuals);
+	}
+
+	@Test
+	public void create2DNumberArrayWithDoubles(){
+		//setup
+		double[][] data = {{0.0, 0.1, 0.2},{1.0, 1.1, 1.2},{2.0, 2.1, 2.2}};
+		Number[][] expecteds = {{0.0, 0.1, 0.2},{1.0, 1.1, 1.2},{2.0, 2.1, 2.2}};
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+		assertArrayEquals(expecteds, actuals);
+	}
+	
+	@Test
+	public void create2DNumberArrayWithNegatives(){
+		//setup
+		double[][] data = {{-1.0, -1.1, -1.2},{0.0, 0.1, 0.2},{1.0, 1.1, 1.2}};
+		Number[][] expecteds = {{-1.0, -1.1, -1.2},{0.0, 0.1, 0.2},{1.0, 1.1, 1.2}};
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+		assertArrayEquals(expecteds, actuals);
+	}
+	
+	@Test
+	public void create2DNumberArrayWithMaxValue(){
+		//setup
+		double[][] data = {{0.0, 1.1},{0.1, Double.MAX_VALUE}};
+		Number[][] expecteds = {{0.0, 1.1},{0.1, Double.MAX_VALUE}};
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+		assertArrayEquals(expecteds, actuals);
+	}
+
+	@Test
+	public void create2DNumberArrayWithMinValue(){
+		//setup
+		double[][] data = {{0.0, 1.1},{0.1, Double.MIN_VALUE}};
+		Number[][] expecteds = {{0.0, 1.1},{0.1, Double.MIN_VALUE}};
+		//Execution
+		Number[][] actuals = DataUtilities.createNumberArray2D(data);
+		assertArrayEquals(expecteds, actuals);
+	}
 
 }
