@@ -453,7 +453,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		for(int index = 0; index < result.getItemCount(); index++){
 			actuals[index] = result.getValue(index);
 		}
-		assertArrayEquals(expecteds, actuals);
+		assertArrayEquals("Testing with values [3,4,5] ",expecteds, actuals);
 	}
 
 	/**
@@ -497,7 +497,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		for(int index = 0; index < result.getItemCount(); index++){
 			actuals[index] = result.getValue(index);
 		}
-		assertArrayEquals(expecteds, actuals);
+		assertArrayEquals("Testing with values [-3,4,5] ",expecteds, actuals);
 	}
 
 	/**
@@ -541,7 +541,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		for(int index = 0; index < result.getItemCount(); index++){
 			actuals[index] = result.getValue(index);
 		}
-		assertArrayEquals(expecteds, actuals);
+		assertArrayEquals("Testing with values [0,0,0] ",expecteds, actuals);
 	}
 
 	/**
@@ -585,7 +585,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		for(int index = 0; index < result.getItemCount(); index++){
 			actuals[index] = result.getValue(index);
 		}
-		assertArrayEquals(expecteds, actuals);
+		assertArrayEquals("Testing with values [-3,1,2], expecting [NaN, NaN, NaN] ",expecteds, actuals);
 	}
 
 }
