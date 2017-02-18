@@ -42,7 +42,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(10.0, result, .000000001d);
+		assertEquals("The result should be 10", 10.0, result, .000000001d);
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(-10.0, result, .000000001d);
+		assertEquals("The result should be -10", -10.0, result, .000000001d);
 	}
 	
 	@Test
@@ -74,7 +74,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(Double.MAX_VALUE-1, result, .000000001d);
+		assertEquals("The result should be " +(Double.MAX_VALUE-1),Double.MAX_VALUE-1, result, .000000001d);
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " +Double.MAX_VALUE, Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -106,7 +106,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(1+Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result shoudl be " + (1+Double.MAX_VALUE), 1+Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -122,7 +122,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(1-Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " + (1-Double.MAX_VALUE), 1-Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -138,7 +138,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(-Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " + (-Double.MAX_VALUE), -Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -154,7 +154,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateColumnTotal(values, 0);
-		assertEquals(-1-Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " + (-1-Double.MAX_VALUE), -1-Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	/**
@@ -174,7 +174,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(10.0, result, .000000001d);
+		assertEquals("The result should be 10", 10.0, result, .000000001d);
 	}
 	
 	@Test
@@ -190,7 +190,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(-10.0, result, .000000001d);
+		assertEquals("The result should be -10",-10.0, result, .000000001d);
 	}
 	
 	@Test
@@ -206,7 +206,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(Double.MAX_VALUE-1, result, .000000001d);
+		assertEquals("The result should be " +(Double.MAX_VALUE-1), Double.MAX_VALUE-1, result, .000000001d);
 	}
 	
 	@Test
@@ -222,7 +222,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " + Double.MAX_VALUE, Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -238,7 +238,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(1+Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result shoudl be " + (1+Double.MAX_VALUE), 1+Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -254,7 +254,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(1-Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " + (1-Double.MAX_VALUE), 1-Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -270,7 +270,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(-Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " + (-Double.MAX_VALUE), -Double.MAX_VALUE, result, .000000001d);
 	}
 	
 	@Test
@@ -286,7 +286,7 @@ public class DataUtilitiesTest extends DataUtilities {
 			}
 		});
 		double result = DataUtilities.calculateRowTotal(values, 0);
-		assertEquals(-1-Double.MAX_VALUE, result, .000000001d);
+		assertEquals("The result should be " + (-1-Double.MAX_VALUE),-1-Double.MAX_VALUE, result, .000000001d);
 	}
 
 	/**
