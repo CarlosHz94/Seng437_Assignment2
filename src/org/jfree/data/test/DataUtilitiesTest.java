@@ -491,7 +491,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		Number[][] actuals = DataUtilities.createNumberArray2D(data);
 	}
 	
-	@Test //(expected = InvalidParameterException.class)
+	@Test 
 	public void create2DNumberArrayWithNaN(){
 		//setup
 		double[][] data = {{0.0, 1.1},{0.1, Double.NaN}};
@@ -501,7 +501,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 	
-	@Test //(expected = InvalidParameterException.class)
+	@Test 
 	public void create2DNumberArrayWithPOS_INF(){
 		//setup
 		double[][] data = {{0.0, 1.1},{0.1, Double.POSITIVE_INFINITY}};
@@ -511,7 +511,7 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertArrayEquals(expecteds, actuals);
 	}
 	
-	@Test //(expected = InvalidParameterException.class)
+	@Test 
 	public void create2DNumberArrayWithNEG_INF(){
 		//setup
 		double[][] data = {{0.0, 1.1},{0.1, Double.NEGATIVE_INFINITY}};
